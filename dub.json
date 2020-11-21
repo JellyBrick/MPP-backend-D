@@ -1,0 +1,13 @@
+{
+	"authors": [
+		"JellyBrick"
+	],
+	"copyright": "Copyright © 2020, JellyBrick",
+	"dependencies": {
+		"dlogg": "~>0.4.1",
+		"vibe-d": "~>0.9.2"
+	},
+	"description": "Unofficial server for the http://multiplayerpiano.com written in D",
+	"license": "Apache-2.0",
+	"name": "mpp-backend"
+}
