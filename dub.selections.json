@@ -7,6 +7,7 @@
 		"diet-ng": "1.7.4",
 		"dlogg": "0.4.1",
 		"eventcore": "0.9.10",
+		"fast": "0.3.5",
 		"libasync": "0.8.6",
 		"memutils": "1.0.4",
 		"mir-linux-kernel": "1.0.1",

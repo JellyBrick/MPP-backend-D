@@ -15,7 +15,7 @@ public class Router {
         httpServerSettings.bindAddresses = [settings.ipv6Address, settings.ipv4Address];
     }
 
-    void handleWebSocketConnection() {
+    void handleWebSocketConnection(scope WebSocket socket) {
 
     }
 
