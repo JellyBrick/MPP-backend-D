@@ -1,7 +1,7 @@
 module server.client;
 
-import std.json;
 import std.conv;
+import vibe.data.json;
 import server.database;
 import server.limiter.client_limit;
 
@@ -26,15 +26,15 @@ class Client {
     }
 
     public auto getJson() {
-        return JSONValue([
-            "name": this.name,
-            "color": '#' + to!string(color, 16),
-            "_id": this.uniqueId
+        return Json([
+            "name": Json(this.name),
+            "color": Json('#' ~ to!string(color, 16)),
+            "_id": Json(this.uniqueId)
         ]);
     }
 
     public auto getDbData() {
-        PlayerInfo data;
+        Database.PlayerInfo data;
         data.color = color;
         data.name = name;
         return data;

@@ -24,9 +24,9 @@ class Database {
 
     Tuple!(bool, PlayerInfo) getUserInfo(uint hash) {
         import fast.json;
-        auto filePath = dir + pathSeparator + to!string(hash);
+        auto filePath = dir ~ pathSeparator ~ to!string(hash);
         if (filePath.exists()) {
-            return tuple(true, json.parseJSONFile(filePath).read!(PlayerInfo));
+            return tuple(true, parseJSONFile(filePath).read!(PlayerInfo));
         } else {
             PlayerInfo info;
             return tuple(false, info);
@@ -34,12 +34,15 @@ class Database {
     }
 
     void setUserInfo(immutable PlayerInfo info, uint hash) {
-        import std.json;
-        JSONValue jsonObject = ["color": info.color];
-        jsonObject.object["name"] = "";
+        import vibe.data.json;
 
-        auto filePath = dir + pathSeparator + to!string(hash);
+        auto filePath = dir ~ pathSeparator ~ to!string(hash);
 
-        File(filePath, "w").write(jsonObject.toString());
+        string jsonString;
+
+        File(filePath, "w").write(Json([
+            "color": Json(info.color),
+            "name": Json(info.name)
+        ]).toString());
     }
 }

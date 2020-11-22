@@ -1,9 +1,13 @@
+# Server log
+server.log
+
 # IDEA / CLion
 .idea
 
 # Compiled Object files
 *.o
 *.obj
+mpp-backend
 
 # Compiled Dynamic libraries
 *.so

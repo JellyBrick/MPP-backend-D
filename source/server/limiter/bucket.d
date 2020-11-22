@@ -9,7 +9,7 @@ class Bucket {
     private float allowance;
     private SysTime lastCheck;
 
-    this(uint a, uint b) {
+    this(ushort a, ushort b) {
         this.rate = a;
         this.per = b;
         this.allowance = cast(float) a;

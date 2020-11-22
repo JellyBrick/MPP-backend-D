@@ -3,14 +3,14 @@ module server.main;
 import server.settings;
 import server.router;
 import dlogg.log;
-import dlogg.buffered;
 import dlogg.strict;
 import argon;
 
 public class MainHandler {
-    private shared StrictLogger logger = new shared StrictLogger("server.log");
+    private shared StrictLogger logger;
 
     this() {
+        logger = new shared StrictLogger("server.log");
         logger.minOutputLevel = LoggingLevel.Notice;
     }
 
@@ -21,11 +21,11 @@ public class MainHandler {
             settings.Parse(args);
         } catch (argon.ParseException e) {
             logger.logError(e.msg);
-            logger.logError(BuildSyntaxSummary);
+            logger.logError(settings.BuildSyntaxSummary);
             return 1;
         }
 
-        auto router = new Router(this);
+        auto router = new Router(settings);
         router.run();
 
         return 0;

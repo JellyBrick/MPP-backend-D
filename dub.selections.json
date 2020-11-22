@@ -6,6 +6,7 @@
 		"colorize": "1.0.5",
 		"diet-ng": "1.7.4",
 		"dlogg": "0.4.1",
+		"emsi_containers": "0.8.0",
 		"eventcore": "0.9.10",
 		"fast": "0.3.5",
 		"libasync": "0.8.6",
