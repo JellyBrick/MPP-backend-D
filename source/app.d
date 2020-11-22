@@ -1,6 +1,7 @@
 import std.stdio;
+import server;
 
-void main()
-{
-	writeln("Edit source/app.d to start your project.");
+int main(string[] args) {
+	auto mainHandler = new MainHandler();
+	return mainHandler.run(args);
 }
