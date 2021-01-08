@@ -23,7 +23,7 @@ struct GrowableCircularQueue(T) {
 
     T opIndex(in size_t i) nothrow @safe {
         assert(i < length);
-        return A[(first + i) & (A.length - 1)];
+        return A[(first + i) & (cast(size_t) A.length - 1)];
     }
 
     void push(T item) @safe {
@@ -37,7 +37,7 @@ struct GrowableCircularQueue(T) {
                 last += oldALen;
             }
         }
-        last = (last + 1) & (A.length - 1);
+        last = (last + 1) & (cast(size_t) A.length - 1);
         A[last] = item;
         length++;
     }
@@ -47,7 +47,7 @@ struct GrowableCircularQueue(T) {
         auto saved = A[first];
         static if (hasIndirections!T)
             A[first] = T.init; // Help for the GC.
-        first = (first + 1) & (A.length - 1);
+        first = (first + 1) & (cast(size_t) A.length - 1);
         length--;
         return saved;
     }

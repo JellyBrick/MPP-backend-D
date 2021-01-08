@@ -7,6 +7,7 @@ import vibe.utils.hashmap;
 import vibe.data.json;
 import std.typecons;
 import std.format;
+import std.range;
 import server.client;
 import server.settings;
 import server.limiter.room_limit;
@@ -54,7 +55,6 @@ class Room {
 
     Json getChatLogJson() {
         Json log;
-        import std.range;
         foreach (i; 0 .. this.chatLog.length) {
             log ~= this.chatLog[i];
         }

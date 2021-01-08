@@ -6,6 +6,9 @@ import std.path;
 import std.conv;
 import std.typecons : tuple, Tuple;
 
+import fastJson = fast.json;
+import vibeJson = vibe.data.json;
+
 class Database {
     private string dir;
 
@@ -23,10 +26,9 @@ class Database {
     }
 
     Tuple!(bool, PlayerInfo) getUserInfo(uint hash) {
-        import fast.json;
         auto filePath = dir ~ pathSeparator ~ to!string(hash);
         if (filePath.exists()) {
-            return tuple(true, parseJSONFile(filePath).read!(PlayerInfo));
+            return tuple(true, fastJson.parseJSONFile(filePath).read!(PlayerInfo));
         } else {
             PlayerInfo info;
             return tuple(false, info);
@@ -34,15 +36,11 @@ class Database {
     }
 
     void setUserInfo(immutable PlayerInfo info, uint hash) {
-        import vibe.data.json;
-
         auto filePath = dir ~ pathSeparator ~ to!string(hash);
 
-        string jsonString;
-
-        File(filePath, "w").write(Json([
-            "color": Json(info.color),
-            "name": Json(info.name)
+        File(filePath, "w").write(vibeJson.Json([
+            "color": vibeJson.Json(info.color),
+            "name": vibeJson.Json(info.name)
         ]).toString());
     }
 }

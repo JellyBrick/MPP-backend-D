@@ -564,7 +564,7 @@ import std.uni;
         final RangeErrorMessage(in InvokedBy invocation) const {
             assert(!vranges.empty);
             string result = "The argument for " ~ DescribeArgumentForError(invocation) ~ " must be ";
-            foreach (uint index, const ref vr; vranges) {
+            foreach (size_t index, const ref vr; vranges) {
                 result ~= vr.toString;
                 const remaining = cast(uint) vranges.length - index - 1;
                 if (remaining > 1)
