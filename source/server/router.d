@@ -1,7 +1,7 @@
 module server.router;
 
 import server.settings;
-import server.message;
+import server.message_handler;
 import vibe.d;
 import vibe.utils.array;
 
