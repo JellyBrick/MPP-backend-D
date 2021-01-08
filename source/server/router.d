@@ -21,8 +21,8 @@ public class Router {
     void handleWebSocketConnection(scope WebSocket socket) {
         while (socket.connected) {
             bool isBinary = false;
-            ubyte[] ubyteArray;
-            string text;
+            ubyte[] ubyteArray = null;
+            string text = null;
             socket.receive((scope IncomingWebSocketMessage message) @safe {
                 if (message.frameOpcode == 0x2) { // binary
                     isBinary = true;

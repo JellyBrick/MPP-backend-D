@@ -1,6 +1,5 @@
 module server.room;
 
-import containers.hashset;
 import container.queue;
 import vibe.d;
 import vibe.utils.hashmap;
@@ -14,7 +13,7 @@ import server.limiter.room_limit;
 
 class Room {
     class ClientInfo {
-        HashSet!(WebSocket) sockets;
+        WebSocket[] sockets;
         RoomLimit quota;
         string id;
         float x;
