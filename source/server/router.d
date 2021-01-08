@@ -36,9 +36,9 @@ public class Router {
             });
 
             if (isBinary) {
-                handler.binary(ubyteArray);
+                handler.binary(ubyteArray, socket);
             } else {
-                handler.text(text);
+                handler.text(text, socket);
             }
         }
     }

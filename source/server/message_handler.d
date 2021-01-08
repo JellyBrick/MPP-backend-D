@@ -1,13 +1,16 @@
 module server.message_handler;
 
+import server.client;
 import server.settings;
-import vibe.d;
 import server.room;
+import vibe.d;
+import vibe.utils.hashmap;
 import fastJson = fast.json;
 import vibeJson = vibe.data.json;
 
 public class MessageHandler {
     private Settings settings;
+    private HashMap!(string, Room) rooms;
 
     this(
         Settings settings
@@ -15,11 +18,22 @@ public class MessageHandler {
         this.settings = settings;
     }
 
-    void binary(ubyte[] ubyteArray) {
+    void binary(ubyte[] ubyteArray, WebSocket socket) {
+        immutable auto arrLength = ubyteArray.length;
+        if (arrLength < 12) {
+            return;
+        }
+        // very simple filter
+        for (size_t x = 9; x < arrLength; x += 3) {
+            if (msg[x] > 87) {
+                return;
+            }
+        }
 
+        // TODO: Implement bin_n
     }
 
-    void text(string text) {
+    void text(string text, WebSocket socket) {
         auto json = vibeJson.parseJsonString(text);
         foreach (Json value; json) {
             auto rawMessage = value["m"];
@@ -53,7 +67,7 @@ public class MessageHandler {
         }
 
         void n() {
-
+            
         }
         
         void a() {
