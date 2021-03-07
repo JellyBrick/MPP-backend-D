@@ -1778,8 +1778,10 @@ import std.uni;
         // object's state can safely be discarded.
 
         auto FreeMemory() {
-            if (!preserve)
-                arg_groups.length = fargs.length = 0;
+            if (!preserve) {
+                arg_groups.length = 0;
+                fargs.length = 0;
+            }
         }
 
         // Assert that the caller hasn't tried to set up a mandatory positional arg
