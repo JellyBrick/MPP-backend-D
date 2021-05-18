@@ -19,7 +19,7 @@ public class Router {
     }
 
     void handleWebSocketConnection(scope WebSocket socket) {
-        while (socket.connected) {
+        while (socket.waitForData && socket.connected) {
             bool isBinary = false;
             ubyte[] ubyteArray = null;
             string text = null;
@@ -34,7 +34,6 @@ public class Router {
                     return;
                 }
             });
-
             if (isBinary) {
                 handler.binary(ubyteArray, socket);
             } else {

@@ -1,5 +1,6 @@
 module server.message_handler;
 
+import std.typecons;
 import server.client;
 import server.settings;
 import server.room;
@@ -10,7 +11,8 @@ import vibeJson = vibe.data.json;
 
 public class MessageHandler {
     private Settings settings;
-    private HashMap!(string, Room) rooms;
+    private HashMap!(string, Room) rooms; // Room name, Room
+    private HashMap!(string, Tuple!(Client, HashMap!(WebSocket, string))) clients; // IP string, Tuple<Client, HashMap<WebSocket, string>>
 
     this(
         Settings settings
@@ -25,12 +27,20 @@ public class MessageHandler {
         }
         // very simple filter
         for (size_t x = 9; x < arrLength; x += 3) {
-            if (msg[x] > 87) {
+            if (ubyteArray[x] > 87) {
                 return;
             }
         }
-
-        // TODO: Implement bin_n
+        auto client = clients.get(socket.request.clientAddress.toString());
+        if (client != HashMap.Value.init) {
+            auto room = rooms.get(client.sockets);
+            if (
+                room != HashMap.Value.init &&
+                (!room.getRoomSettings().canPlayOwnerOnly || room.getCrownInfo().owner == client)
+            ) {
+                // TODO: Implement bin_n
+            }
+        }
     }
 
     void text(string text, WebSocket socket) {

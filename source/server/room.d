@@ -52,6 +52,14 @@ class Room {
         this.crownInfo = CrownInfo(null, null, [50, 50], [50, 50], 0);
     }
 
+    RoomSettings getRoomSettings() {
+        return roomSettings;
+    }
+
+    CrownInfo getCrownInfo() {
+        return crownInfo;
+    }
+
     Json getChatLogJson() {
         Json log;
         foreach (i; 0 .. this.chatLog.length) {
